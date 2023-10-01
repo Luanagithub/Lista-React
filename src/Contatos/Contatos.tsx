@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
-import EscopoStyled from '../Agenda/Escopo.tsx';
+import { useState } from 'react';
 import AddContato from '../AddContato/NovoContato.tsx';
 
+interface Todo {
+    name: string;
+    email: string;
+    telefone: string;
+}
+
 function Contato() {
-    const [todos, setTodos] = useState([
+    const [todos, setTodos] = useState<Todo[]>([
         {
             name: 'Dan',
             email: 'dan@example.com',
@@ -16,13 +21,13 @@ function Contato() {
         },
     ]);
 
-    const [editingIndex, setEditingIndex] = useState(null);
-    const [editNome, setEditNome] = useState('');
-    const [editEmail, setEditEmail] = useState('');
-    const [editTelefone, setEditTelefone] = useState('');
+    const [editingIndex, setEditingIndex] = useState<number | null>(null);
+    const [editNome, setEditNome] = useState<string>('');
+    const [editEmail, setEditEmail] = useState<string>('');
+    const [editTelefone, setEditTelefone] = useState<string>('');
 
-    const novoContato = (nome, email, telefone) => {
-        const newTodos = [
+    const novoContato = (nome: string, email: string, telefone: string) => {
+        const newTodos: Todo[] = [
             ...todos,
             {
                 name: nome,
@@ -34,18 +39,20 @@ function Contato() {
         setTodos(newTodos);
     };
 
-    const handleEditClick = (index) => {
-        setEditingIndex(index);
-        // Preencha os campos de entrada de texto com os valores atuais
-        setEditNome(todos[index].name);
-        setEditEmail(todos[index].email);
-        setEditTelefone(todos[index].telefone);
+    const handleEditClick = (index: number | null) => {
+        if (index !== null) {
+            setEditingIndex(index);
+            // Preencha os campos de entrada de texto com os valores atuais
+            setEditNome(todos[index].name);
+            setEditEmail(todos[index].email);
+            setEditTelefone(todos[index].telefone);
+        }
     };
 
-    const handleSaveClick = (index) => {
-        if (index === editingIndex) {
+    const handleSaveClick = (index: number | null) => {
+        if (index !== null) {
             // Clone o array de contatos
-            const updatedTodos = [...todos];
+            const updatedTodos: Todo[] = [...todos];
 
             // Modifique apenas o contato que está sendo editado
             updatedTodos[index] = {
@@ -60,8 +67,8 @@ function Contato() {
         }
     };
 
-    const removeTodo = (index) => {
-        const newTodos = [...todos];
+    const removeTodo = (index: number) => {
+        const newTodos: Todo[] = [...todos];
         newTodos.splice(index, 1);
         setTodos(newTodos);
     }

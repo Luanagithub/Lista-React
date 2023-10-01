@@ -1,6 +1,7 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
+import { ReactNode } from 'react'
 
-export const Escopo = styled.div`
+export const EscopoStyled= styled.form<{ children: ReactNode }>`
     border:5px solid #f3f3f3;
     border-inline-end:5px solid #6a6e84;
     border-inline-start-style:5px solid #373b53;
@@ -17,4 +18,20 @@ export const Escopo = styled.div`
     font-size: 15px;
 `
 
-export default Escopo;
+interface EscopoComponentProps {
+    children: ReactNode;
+    onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+}
+
+const EscopoComponent: React.FC<EscopoComponentProps> = (props) => {
+    return (
+    <EscopoStyled onSubmit={props.onSubmit}>
+        {props.children}
+    </EscopoStyled>
+    );
+}
+
+export default EscopoComponent;
+
+
+

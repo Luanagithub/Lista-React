@@ -58,13 +58,6 @@ const EstiloGlobal = createGlobalStyle`
     line-height: 1.1;
     }
 
-    button {
-
-    }
-    :hover {
-    border-color: ;
-    }
-
     #root {
     max-width: 1280px;
     margin: 0 auto;
